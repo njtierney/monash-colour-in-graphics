@@ -1,0 +1,114 @@
+/* Extra CSS */
+.red {
+  color: red;
+}
+.small {
+  font-size: 80%;
+}
+.tiny {
+  font-size: 60%;
+}
+.large {
+  font-size: 150%;
+}
+.vlarge {
+  font-size: 200%;
+}
+.huge {
+  font-size: 250%;
+}
+.vhuge {
+  font-size: 350%;
+}
+.full-width {
+  display: flex;
+  width: 100%;
+  flex: 1 1 auto;
+}
+.left-code {
+  width: 38%;
+  height: 92%;
+  float: left;
+}
+.right-plot {
+  width: 60%;
+  float: right;
+  padding-left: 1%;
+}
+.pull-left {
+  float: left;
+  width: 47%;
+}
+.pull-right {
+  float: right;
+  width: 47%;
+}
+div.my-footer {
+  background-color: #ECECF1;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 40px;
+  width: 100%;
+}
+
+.inverse .my-footer {
+  background-color: #ECECF1;
+}
+div.my-footer span {
+  font-size: 16pt;
+  color: #125972;
+  position: absolute;
+  left: 20px;
+  bottom: 10px;
+}
+
+
+/* Extra CSS */
+.red {
+  color: red;
+}
+.small {
+  font-size: 80%;
+}
+.tiny {
+  font-size: 60%;
+}
+.medium {
+  font-size: 120%;
+}
+.large {
+  font-size: 150%;
+}
+.vlarge {
+  font-size: 200%;
+}
+.huge {
+  font-size: 250%;
+}
+.vhuge {
+  font-size: 350%;
+}
+.full-width {
+  display: flex;
+  width: 100%;
+  flex: 1 1 auto;
+}
+.left-code {
+  width: 38%;
+  height: 92%;
+  float: left;
+}
+.right-plot {
+  width: 60%;
+  float: right;
+  padding-left: 1%;
+}
+.pull-left {
+  float: left;
+  width: 47%;
+}
+.pull-right {
+  float: right;
+  width: 47%;
+}

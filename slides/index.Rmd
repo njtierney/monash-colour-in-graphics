@@ -1,0 +1,194 @@
+---
+title: 'Awesome title'
+subtitle: "subtitle"  
+author: "<span style = 'font-size: 90%;'>Nicholas Tierney, Monash University</span>"
+date: "<span style = 'font-size: 90%;'>CONFERENCE <br><br> MONDAY 1st January, 1920 </span> <br><br> `r #icon::fa('link')` [LINK]() <br><br>`r #icon::fa('twitter')` [nj_tierney](https://twitter.com/nj_tierney)"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [njtheme.css, extra.css, animate.css]
+    nature:
+      ratio: "16:9"
+      titleSlideClass: ["left", "middle", "inverse"]
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+layout: true
+<div class="my-footer"><span>bit.ly/LINK • @nj_tierney</span></div> 
+
+```{r setup, include=FALSE}
+# options(htmltools.dir.version = FALSE, width = 120)
+# NOTE TO SELF: The CSS styles were created in `create-njt-theme.R`
+knitr::opts_chunk$set(
+  fig.path = "figures/",
+  cache.path = "cache/",
+  fig.align = "center",
+  fig.width = 13,
+  fig.height = 6,
+  fig.retina = 3,
+  fig.show = "hold",
+  external = TRUE,
+  # dev = "svglite",
+  # dev.args = list(bg = "transparent"),
+  message = FALSE,
+  warning = FALSE,
+  cache = FALSE,
+  echo = FALSE,
+  autodep = TRUE
+)
+```
+
+```{r library, include = FALSE}
+library(tidyverse)
+library(visdat)
+library(naniar)
+library(gganimate)
+library(knitr)
+library(ggrepel)
+```
+
+
+
+```{r helpers, include=FALSE}
+mp4_vid <- function(src){
+  HTML(
+    paste0(
+      '<video autoplay>
+        <source src="', src, '" type="video/mp4">
+      </video>'
+    )
+  )
+}
+
+fig.fullsize <- c(fig.height = 3.5, fig.width = 8, out.width = "150%"
+)
+
+as_table <- function(...) knitr::kable(..., format='html', digits = 3)
+
+theme_set(
+  theme_grey(base_size = 16) +
+  theme(
+    legend.position = "bottom",
+    plot.background = element_rect(fill = "transparent"),
+    legend.background = element_rect(fill = "transparent")
+  )
+)
+
+# **ni**ck's **pa**lette
+nipa <- list(red = "#c03018",
+             orange = "#f0a800",
+             green = "#609048",
+             purple = "#484878",
+             light_purple = "#A3A3BB",
+             light_green = "#AFC7A3",
+             light_orange = "#F7D37F",
+             light_red = "#DF978B",
+             pale_purple = "#ECECF1",
+             pale_green = "#D7E3D1",
+             pale_orange = "#FBE9BF",
+             pale_red = "#EFCBC4")
+
+```
+
+---
+class: inverse, middle, center
+
+# Intro
+
+---
+
+# Background
+
+---
+
+Put More slides here.
+
+---
+
+# Take homes
+
+---
+
+# Future Directions
+
+.large[
+- More features
+- More features
+- More features
+]
+
+---
+
+# Test
+
+.small[small]
+.
+
+---
+
+# Thanks
+
+.large.pull-left[
+- So many great people
+- So many great people
+- So many great people
+- So many great people
+]
+
+.large.pull-right[
+- So many great people
+- So many great people
+- So many great people
+- So many great people
+]
+
+---
+
+# Resources
+
+.large[
+- So many things
+- So many things
+- So many things
+- So many things
+]
+
+---
+
+# Colophon
+
+.large[
+- Slides made using [xaringan](https://github.com/yihui/xaringan)
+- Extended with [xaringanthemer](https://github.com/gadenbuie/xaringanthemer)
+- Colours taken + modified from [lorikeet theme from ochRe](https://github.com/ropenscilabs/ochRe)
+- Header font is **Josefin Sans**
+- Body text font is **Montserrat**
+- Code font is **Fira Mono**
+- template available: [njtierney/njt-talks](github.com/njtierney/njt-talks)
+]
+
+---
+
+# Learning more
+
+.large[
+`r icon::fa_box_open() ` [package link]()
+
+`r icon::fa('link')` [talk link]()
+
+`r icon::fa_twitter()` nj_tierney
+
+`r icon::fa_github()` njtierney
+
+`r icon::fa_paper_plane()` nicholas.tierney@gmail.com
+
+]
+
+
+---
+
+.vhuge[
+**End.**
+]
