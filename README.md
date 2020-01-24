@@ -41,6 +41,6 @@ optimisation ([maxcovr](http://maxcovr.njtierney.com/)), Bayesian Data Analysis,
 
 Nick is a member of the [rOpenSci](https://ropensci.org/) collective, which works to make science
 open using R, has been the lead organiser for the rOpenSci ozunconf
-events from 2016-2018 ( [2016](https://auunconf.ropensci.org/), [2017](https://ozunconf17.ropensci.org/), [2018](https://ozunconf18.ropensci.org/)), and co-hosts the rstats podcast ["Credibly
+events from 2016-2018 ([2016](https://auunconf.ropensci.org/), [2017](https://ozunconf17.ropensci.org/), [2018](https://ozunconf18.ropensci.org/)), and co-hosts the rstats podcast ["Credibly
 Curious"](https://soundcloud.com/crediblycurious) with [Dr. Saskia Freytag](https://careers.amsi.org.au/saskia/). Outside of research, Nick likes to
 hike, rockclimb, make coffee, bake sourdough, (eventually) knit a hat, take photos, and explore new hobbies.
