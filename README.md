@@ -1,22 +1,17 @@
-# Nick's Slide Template
+# Nick's Slide Template (replace with talk title)
+<!-- NETLIFY BADGE SHOULD GO HERE-->
 
 This is a slide template I have put on github so that I can get started with talks easier.
 
-# Learn more about this talk at [this link](FILL IN HERE)
+# Abstract
 
 # Slide available [here](https://bit.ly/FILL-ME-IN)
-
-<!-- NETLIFY BADGE SHOULD GO HERE-->
 
 # Take home messages 
 
 1. Point one
 1. Point two
 1. Point three
-
-# Abstract
-
-
 
 # Thanks
 
@@ -33,7 +28,7 @@ This is a slide template I have put on github so that I can get started with tal
   - Body text font is **Montserrat**
   - Code font is **Fira Mono**
 
-# bio
+# Bio
 
 Dr. Nicholas Tierney (PhD. Statistics, BPsySci (Honours)) is a Research
 Fellow in Statistics at Monash University, working with Professors
