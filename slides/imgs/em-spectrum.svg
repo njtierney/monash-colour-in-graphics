@@ -1,0 +1,79 @@
+<svg width="787" height="421" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<linearGradient id="lgSpectrum">
+<stop stop-color="#4C34A3"/>
+<stop offset=".1067" stop-color="#5380AD"/>
+<stop offset=".2528" stop-color="#2A8EB0"/>
+<stop offset=".3146" stop-color="#4EABAE"/>
+<stop offset=".3652" stop-color="#4CBF35"/>
+<stop offset=".5056" stop-color="#EEF059"/>
+<stop offset=".5899" stop-color="#F2CA61"/>
+<stop offset=".6348" stop-color="#E48D3C"/>
+<stop offset=".8034" stop-color="#FF5B45"/>
+<stop offset="1" stop-color="#BF2626"/>
+</linearGradient>
+<rect width="787.16" height="421.16" fill="#FFF"/>
+<rect x="21.16" y="68.16" width="744" height="81" fill="#DBDBDB"/>
+<rect x="87.16" y="238.16" width="425" height="116" fill="url(#lgSpectrum)"/>
+<rect x="297.79" y="68.16" width="12.25" height="81" fill="url(#lgSpectrum)"/>
+
+<g fill="none" stroke="#000">
+<path d="M60.5 61.16v7m53.41 0v-7m53.42 0v7m53.42 0v-7m53.41 0v7m53.42 0v-7m53.42 0v7m53.41 0v-7m53.42 0v7m53.42 0v-7m53.41 0v7m53.42 0v-7m53.42 0v7"/>
+<path d="M185.16 68.16v81m76 0v-81m137 0v81m80.34 7v-88m26.7 0v53.42m0 16.46v11.12m26.71 7V138.04m0-16.46V68.16m26.71 0v81"/>
+<path d="M51.16 149.16v7m53.42 0v-7m53.42 0v7m53.41 0v-7m53.42 0v7m53.42 0v-7m53.41 0v7m53.42 0v-7m160.25 0v7m53.42 0v-7m53.41 0v7"/>
+<path d="M87.16 238.16v-15L297.79 184.5V149.16m214.37 89v-15L310.04 184.5V149.16" stroke-dasharray="4.44,4"/>
+<path d="M512.16 354.16v7h-425v-7m13.28 0v7m13.29 0v-7m13.28 0v7m13.28 0v-7m13.28 0v7m13.28 0v-7m13.28 0v7m13.28 0v-7m13.28 0v7m13.29 0v-7m13.28 0v7m13.28 0v-7m13.28 0v7m13.28 0v-7m13.28 0v7m13.28 0v-7m13.28 0v7m13.29 0v-7m13.28 0v7m13.28 0v-7m13.28 0v7m13.28 0v-7m13.28 0v7m13.28 0v-7m13.28 0v7m13.29 0v-7m13.28 0v7m13.28 0v-7m13.28 0v7m13.28 0v-7m13.28 0v7"/>
+<path d="M490.1 27.53H473.8m5.47-2.58-5.25 2.2v.76l5.25 2.2"/>
+<path d="M690.05 195.5h16.3m-5.47-2.58 5.25 2.2v.76l-5.25 2.2"/>
+<path d="M387.8 397.05h12m-4-1.9 3.89 1.6v.6l-3.89 1.6" stroke-width=".75"/>
+</g>
+
+<g font-family="Liberation Serif" font-size="14.2">
+<text x="481.4" y="201.35" font-size="19">Increasing Wavelength (λ)</text>
+<text x="495.7" y="33.35" font-size="19">Increasing Frequency (ν)</text>
+<text x="51" y="58">10<tspan dy="-6" font-size="10">24</tspan></text>
+<text x="104.42" y="58">10<tspan dy="-6" font-size="10">22</tspan></text>
+<text x="157.83" y="58">10<tspan dy="-6" font-size="10">20</tspan></text>
+<text x="211.25" y="58">10<tspan dy="-6" font-size="10">18</tspan></text>
+<text x="264.67" y="58">10<tspan dy="-6" font-size="10">16</tspan></text>
+<text x="318.08" y="58">10<tspan dy="-6" font-size="10">14</tspan></text>
+<text x="371.5" y="58">10<tspan dy="-6" font-size="10">12</tspan></text>
+<text x="424.92" y="58">10<tspan dy="-6" font-size="10">10</tspan></text>
+<text x="480.83" y="58">10<tspan dy="-6" font-size="10">8</tspan></text>
+<text x="534.25" y="58">10<tspan dy="-6" font-size="10">6</tspan></text>
+<text x="587.67" y="58">10<tspan dy="-6" font-size="10">4</tspan></text>
+<text x="641.08" y="58">10<tspan dy="-6" font-size="10">2</tspan></text>
+<text x="694.5" y="58">10<tspan dy="-6" font-size="10">0</tspan></text>
+<text x="731" y="58">ν (Hz)</text>
+<text x="85" y="113">γ rays</text>
+<text x="206" y="113">X rays</text>
+<text x="271" y="113">UV</text>
+<text x="348" y="113">IR</text>
+<text x="406" y="113">Microwave</text>
+<text x="482" y="113">FM</text>
+<text x="534" y="113">AM</text>
+<text x="613" y="113">Long radio waves</text>
+<text x="482" y="134">Radio waves</text>
+<text x="41.5" y="172">10<tspan dy="-6" font-size="10">−16</tspan></text>
+<text x="94.92" y="172">10<tspan dy="-6" font-size="10">−14</tspan></text>
+<text x="147.58" y="172">10<tspan dy="-6" font-size="10">−12</tspan></text>
+<text x="201.75" y="172">10<tspan dy="-6" font-size="10">−10</tspan></text>
+<text x="257.67" y="172">10<tspan dy="-6" font-size="10">−8</tspan></text>
+<text x="311.08" y="172">10<tspan dy="-6" font-size="10">−6</tspan></text>
+<text x="364.5" y="172">10<tspan dy="-6" font-size="10">−4</tspan></text>
+<text x="417.92" y="172">10<tspan dy="-6" font-size="10">−2</tspan></text>
+<text x="473.83" y="172">10<tspan dy="-6" font-size="10">0</tspan></text>
+<text x="527.25" y="172">10<tspan dy="-6" font-size="10">2</tspan></text>
+<text x="580.67" y="172">10<tspan dy="-6" font-size="10">4</tspan></text>
+<text x="634.08" y="172">10<tspan dy="-6" font-size="10">6</tspan></text>
+<text x="687.5" y="172">10<tspan dy="-6" font-size="10">8</tspan></text>
+<text x="738" y="172">λ (m)</text>
+<text x="252" y="231.4">Visible spectrum</text>
+<g text-anchor="middle">
+<text x="100.44" y="379.28">400</text>
+<text x="233.26" y="379.28">500</text>
+<text x="366.07" y="379.28">600</text>
+<text x="498.88" y="379.28">700</text>
+</g>
+<text x="198" y="401">Increasing Wavelength (λ) in nm</text>
+</g>
+</svg>

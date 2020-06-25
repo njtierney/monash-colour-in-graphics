@@ -1,8 +1,8 @@
 ---
-title: 'The use of colour in graphics. '
-subtitle: "A journey through the body & mind to the screen"  
+title: '.large[The use of colour in graphics]'
+subtitle: ".large[A journey through the body & mind to the screen]"  
 author: "<span style = 'font-size: 90%;'>Nicholas Tierney, Monash University</span>"
-date: "<span style = 'font-size: 90%;'>Monash Data Fluency <br><br> Friday 26th June, 2020 </span> <br><br> `r #icon::fa('link')` [LINK]() <br><br>`r #icon::fa('twitter')` [nj_tierney](https://twitter.com/nj_tierney)"
+date: "<div class='medium'>Monash Data Fluency, June 26 <br><br> `r # icon::fontawesome(name = 'link', 'solid')` **bit.ly/njt-monash-colour** <br><br> `r # icon::fontawesome$brands$twitter` **nj_tierney**</div>"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -13,10 +13,12 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+      slideNumberFormat: "%current%"
 ---
 
 layout: true
-<div class="my-footer"><span>bit.ly/LINK • @nj_tierney</span></div> 
+<div class="my-footer"><span>bit.ly/njt-monash-colour • @nj_tierney</span></div> 
+
 
 ```{r setup, include=FALSE}
 # options(htmltools.dir.version = FALSE, width = 120)
@@ -34,21 +36,64 @@ knitr::opts_chunk$set(
   # dev.args = list(bg = "transparent"),
   message = FALSE,
   warning = FALSE,
-  cache = FALSE,
+  cache = TRUE,
   echo = FALSE,
   autodep = TRUE
 )
 ```
 
-```{r library, include = FALSE}
-library(tidyverse)
-library(visdat)
-library(naniar)
-library(gganimate)
-library(knitr)
-library(ggrepel)
+```{r icons}
+fa_twitter <- icon::fontawesome$brands$twitter
+fa_github <- icon::fontawesome$brands$github
+fa_link <- icon::fontawesome$solid$link
+fa_plane <- icon::fontawesome$solid$`paper-plane`
+fa_box_open <- icon::fontawesome$solid$`box-open`
 ```
 
+
+```{r library, include = FALSE}
+library(tidyverse)
+library(gganimate)
+library(knitr)
+library(drake)
+library(colorspace)
+library(magick)
+library(ggspectra)
+library(scales)
+library(drake)
+library(photobiology)
+library(photobiologyWavebands)
+```
+
+```{r fun-tidy-photowave}
+read_tidy_photowave <- function(path){
+  readr::read_csv(file = path,
+                  col_names = c("wavelength_nm",
+                                "cone_s",
+                                "cone_m",
+                                "cone_l")) %>% 
+  tidyr::pivot_longer(cols = cone_s:cone_l,
+                      names_to = "type",
+                      values_to = "response")
+}
+
+# data provided from http://cvrl.ucl.ac.uk/cones.htm
+# 10-deg fundamentals based on the Stiles & Burch 10-deg CMFs
+  # units: energy (linear)
+  # stepsize: 0.1 nm
+  # Format: csv
+
+cone_response <- read_tidy_photowave(
+  here::here("slides/data/linss2_10e_fine.csv")
+)
+```
+
+```{r funs-p-img}
+p_img <- function(obj, nam) {
+  image(1:length(obj), 1, as.matrix(1:length(obj)), col=obj, 
+        main = nam, ylab = "", xaxt = "n", yaxt = "n",  bty = "n")
+}
+```
 
 
 ```{r helpers, include=FALSE}
@@ -92,59 +137,134 @@ nipa <- list(red = "#c03018",
 
 ```
 
----
-class: inverse, middle, center
+```{r funs-cone-receptor}
+gg_colour_spectra <- function(cone_response){
+  ggplot(cone_response,
+       aes(x = wavelength_nm,
+           y = response,
+           group = type)) + 
+  wl_guide(chroma.type = "CMF") +
+  scale_x_continuous(limits = c(390, 710), 
+                     expand = c(0, 0),
+                     breaks = scales::breaks_width(25)) +
+    labs(x = "Wavelength (nm)",
+         y = "Normalised cone response (linear energy)")
+}
 
-# Intro
-
----
-
-```{r show-bom, echo = FALSE}
-bom_map_link <- here::here("slides/imgs/bom-heat-map.png")
-include_graphics(bom_map_link)
+gg_cone_receptor <- function(cone_response){
+gg_colour_spectra(cone_response) +
+  geom_line(colour = "white", size = 1)
+}
 ```
 
-???
- 
-The inspiration for this talk comes from this graphic
-
 ---
-# A few reasons that I don't like it
 
-.left-code[
-- It is hard to see what is interesting.
-- It is not colourblind safe.
-- It is not perceptually uniform
-]
+# Your turn: What makes this graphic good, and bad?
 
-.right-plot[
-```{r show-bom-again}
-include_graphics(bom_map_link)
+```{r show-bom}
+include_graphics(here::here("slides/imgs/bom-heat-map.png"))
 ```
 
-]
+---
+
+# BoM `r emo::ji("sad")`
+
+
+```{r load-maps, cache = FALSE}
+drake::loadd(map_high_temp)
+drake::loadd(map_high_temp_bom)
+drake::loadd(map_high_temp_viridis)
+```
+
+```{r map-bom, cache = FALSE}
+map_high_temp_bom
+```
 
 ---
-# Better map
 
-***
+# Viridis `r emo::ji("happy")`
+
+```{r map-viridis, cache = FALSE}
+map_high_temp_viridis
+```
+
+---
+
+# Default ggplot `r emo::ji("happy")`
+
+```{r map-default-ggplot, cache = FALSE}
+map_high_temp + 
+  labs(fill = NULL) +
+  guides(guide = guide_legend(reverse = TRUE))
+```
+
+---
+
+# Jet?
+
+```{r map-jet, cache = FALSE}
+map_high_temp +
+  scale_fill_manual(
+      values = pals::jet(n = 19),
+      name = "",
+      guide = guide_legend(reverse = TRUE)
+        )
+```
 
 ???
 
 Sometimes the conversation ends there, and you provide them a few graphics that look better. Like this.
 
 ---
-# But why is this better?
+# How do we describe what is better/worse about them?
 
-Some typical responses to this are:
+```{r both-maps, out.width = "20%", fig.show='hold'}
+map_high_temp_bom
+map_high_temp_viridis
+```
 
-- It's colourblind safe
-- It's perceptually uniform
-- It can be turned to grayscale
+---
+
+# But why is one better?
+
+.left-code[
+```{r show-bom-again-again}
+include_graphics(here::here("slides/imgs/bom-heat-map.png"))
+```
+]
+
+.right-plot[
+- Need a vocabulary to describe **why** this is wrong
+- Not just: "It's not colourblind safe", "The colours are wrong"
+]
+
+???
+
+I guess the other parts of my motivation for this talk come from seeing a lot of people using bad/sub optimal colourscales. 
+
+There is great tooling in R to do the following:
+
+---
+
+# Two terms to unpack
+
+- Colourblindness
+- Perceptually uniform
 
 --
 
-But what do those terms mean? And how can we use our understanding of that to create better graphics?
+- ... But to do that we need to unpack a few more things
+
+---
+# Goals of this talk
+
+- What is colour?
+- How do we see colour?
+- What is colourblindness?
+- What is a vocabulary around colour?
+- How do I use colour in my plot?
+- How do I assess colour?
+- How do I create new colour palettes?
 
 ???
 
@@ -152,182 +272,579 @@ This made sense to me, I know what colourblindness is, and I know what perceptua
 
 But I also have an honours degree in Psychological Science. My honours project studied the human visual system, in an area called psychophysics. I didn’t study colour, but we did need to learn about the visual system in neuropsychology.
 
----
-# Goals for this talk:
 
-- Convince you that colour choice matters
-- Demonstrate how to assess colours
-- How to create colour palettes
+# What is colour?
 
----
-# What does colourblind safe mean?
+--
 
----
-# Fullscreen gif of colours that change, but are (pretty much) exactly the same colour for people with colourblindness.
+Disclaimer: This is a _brief_ introduction into a **complex** topic
+
+This section is inspired by [Calder Hansen's ](https://www.youtube.com/channel/UC7zwxzcgdrjnFkRrLnfN_CA) [The Science of Color Perception](https://www.youtube.com/watch?v=poL7nDmqjmk))
 
 
 ---
-# Stepping back: How do we use colour in a data analysis
+# Colour: Waves of light, perceived.
 
-We use colour so that we can understand some other dimension of the data.
 
-For example.
+Just as there are soundwaves that you can hear `r emo::ji("sound")` `r emo::ji("ear")`
 
-What are the components of the graphic?
+There are lightwaves that we see `r emo::ji("light")` `r emo::ji("eyes")`
 
-X axis...y axis...colour, how these map onto a graphic
-
----
-# Stepping back again: What even **is** colour?
-
----
-# Colour = Waves of light, perceived as colour.
+???
 
 This combines physics, biology, and a bit of philosophy. 
 
-- Just like there are soundwaves that you can hear
-- There are lightwaves that we see
-
-(Disclaimer: This is a brief introduction into a complex topic)
 ---
 # Physics of Colour
 
-- These lightwaves come in different shapes - different wavelengths
+These lightwaves come in different shapes - different wavelengths:
 
-Short
-
-Medium
-
-Long
+**image**
 
 ---
-# Physics of Colour
+# The visible spectrum
 
-We can plot the visible spectrum like so:
+```{r show-spectra}
+gg_colour_spectra(cone_response)
+```
+
+
+??
 
 - At this end we have the longest wavelengths
 - At this end we have the shortest wavelengths
 
 ---
+# Physics of Colour (More than we can see)
+
+```{r show-em, out.width = "80%"}
+include_graphics(here::here("slides/imgs/em-spectrum.svg"))
+```
+
+> From https://commons.wikimedia.org/wiki/File:EM_spectrum.svg 
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+
+???
+
+- Note that this is just a tiny slice of the light spectrum
+- We just happen to be able to see this range of colours
+- But How?
+
+---
 # Physics of Colour
 
+(graphic from ipad)
+
+
+???
 - Lightwaves enter our eyes, and we have the perception of colour.
+  - Shorter wavelengths = "purple" / "blue
   - longer wavelengths = "red"
-  - Shorter wavelengths = "purple"
-
-- How? Rods and Cones. Let's only talk about cones though.
-
-(Disclaimer: This is a brief introduction into a complex topic)
+  
+- As light enters the eye, it hits cells that are sensitive to light. 
+- These cells are called rods and cones. 
+- The cones are the bits that allow us to see colour
 
 ---
-# Biology of colour
+# Biology of colour: cones
 
-- I we get only one type of colour entering in the eye, we get one colour.
+- If we get only one type of colour entering in the eye, we get one colour.
 - This is because of these three cones:
 
-  - Red Cone - likes longer wavelengths
-  - Green Cone - likes medium wavelengths
-  - Blue cone - likes shorter wavelengths
+```{r show-cones, out.width = "50%"}
+include_graphics(here::here("slides/imgs/cone-family-trim.png"))
+```
   
+- Colours are brighter when there is more of the light
+- most colours are a combination of multiple wave lengths
+
+  
+---
+# Biology of colour: cones
+
 - We can actually plot how sensitive each of these cones are like so:
 
+```{r cone-sensitivity}
+cone_response %>% gg_cone_receptor()
+```
+
+
+[from https://en.wikipedia.org/wiki/Cone_cell]
+
+> Normalized responsivity spectra of human cone cells, S, M, and L types
+
+
+Image inspired by [figure of responsivity of human eye from Wikipedia](https://en.wikipedia.org/wiki/File:Cone-fundamentals-with-srgb-spectrum.svg), data extracted from [Colour & Vision Research laboratory at UCL's](http://cvrl.ucl.ac.uk) section on [cones](http://cvrl.ucl.ac.uk/cones.htm).
+
+
+
 ---
-# 
+# How do we see colour? Red?
+
+So what happens when we are exposed to a lot of these longer wavelengths of "red" light?
+
+- Long cones react
+- Medium cones not so much
+- S cones not at all
+
+That information is then taken in to your brain and then you have the sensation of "red".
+
+---
+# But I don't just see red and green and blue?
+
+- Colour is made up of the _combination_ of light entering our eye.
+- Red could be some of ..., and some of ...
+- Orange could be
+- White could be all colours, or it could just be 
+
+There are actually many different combinations of light waves that can get us to see different colours.
+
+This means that colour is not just a single light waves, or a combination of many, but it is our perception of light
+
+---
+# Colourblindness
+
+- What happens if someone doesn't have some of these cones?
+- Or one of the cones isn't as responsive?
+- This is what we call **colourblindness** and **colourweakness**
+
+- Depending on which cones are missing, this means some sets of colours are indistinguishable from one another. 
+
+- It affects up to 10% of males of European descent, and 1 in 200 women (REF).
+
+---
+# Full colour vision
+
+```{r full-colour}
+gg_cone_receptor(cone_response)
+```
 
 
 ---
-# The light that we don't see
+# No S cone = Protonopia (Less "red")
 
-There are lightwaves that we cannot see - we are only seeing a small slice of 
-the spectrum of light.
+```{r show-colour-response-no-s}
+cone_response %>% filter(type != "cone_s") %>%  gg_cone_receptor()
+# Show the density shrinking? Or perhap use magick to fade it out
+# or using gganimate with transition_states() exit_fade() or exit_shrink()?
+```
 
-Different wavelengths reflecting off of surfaces at different speeds, which we see differently?
+---
+# No M cone = Deutanopia (Less "green")
+
+```{r show-colour-response-no-m}
+cone_response %>% filter(type != "cone_m") %>%  gg_cone_receptor()
+```
+
+---
+# No L cone = Tritanopia (Less "Blue")
+
+```{r show-colour-response-no-l}
+cone_response %>% filter(type != "cone_l") %>%  gg_cone_receptor()
+```
+
+---
+# Without those cones, some colours look the same
+
+
+---
+# Colourblindness, why does it matter? 
+
+This is why traffic lights have position markings, instead of just the same position changing colour.
+
+```{r traffic-cones}
+traffic <- image_read_svg(
+  here::here("slides/imgs/traffic-light.svg")
+)
+
+# red_light <- traffic %>% image_crop("275x230 + 0 + 29")
+# amber_light <- traffic %>% image_crop("275x230 + 0 + 260")
+# green_light <- traffic %>% image_crop("275x230 + 0 + 491")
+
+# colorspace::cvd_emulator(here::here("content/post/drafts/2020-06-10-what-is-colourblindness/imgs/traffic-light.jpeg"))
+
+traffic_deutan <- image_read(
+  here::here("slides/imgs/deutan_traffic-light.jpeg")
+)
+traffic_protan <- image_read(
+  here::here("slides/imgs/protan_traffic-light.jpeg")
+)
+traffic_tritan <- image_read(
+  here::here("slides/imgs/tritan_traffic-light.jpeg")
+)
+
+# traffic_deutan %>% image_annotate(text = "Deutan", 
+#                                   color = "white",
+#                                   gravity = "south",
+#                                   size = 20)
+```
+
+---
+# Normal Traffic Light
+
+```{r traffic-normal}
+traffic
+```
+
+---
+# Traffic Light (Protan)
+
+```{r traffic-protan}
+traffic_protan
+```
+
+---
+# Traffic Light (Deutan)
+
+```{r traffic-deutan}
+traffic_deutan
+```
+
+---
+# Traffic Light (Tritan)
+
+```{r traffic-tritan}
+traffic_tritan
+```
+
+
+---
+# All the traffic lights
+
+```{r traffic-cones-all}
+image_append(c(traffic,
+               traffic_protan,
+               traffic_deutan,
+               traffic_tritan))
+
+```
+
+???
+
+_gif of good traffic light for different vision_
+
+vs
+
+_gif of bad traffic light with different vision_
+
+
+---
+# Colourblindness, my point is:
+
+> Some colours cannot be distinguished by those with colourblindness, so we need to be careful how we present colour, and what colours we present.
+
+---
+# How to test how well your plot stands up to colourblindness?
+
+---
+# Colourblindness: testing our colours
+
+- 
+
+There are many colourblindness simulators, but we can use some in R. They take in an image as a JPG/PNG. So now, let's explore what this original image from BoM looks like.
+
+To do so, we can use the `cvd_emulator` function from `colorspace`:
+
+```r
+cvd_emulator("imgs/bom-heat-map.png")
+```
 
 ---
 
-So now that we understand what colourblindness is, let's discuss what this means for graphics.
+# Original image
 
-We need some different terminology, that will allow us to better discuss colour for this purpose.
+```{r og-bom, out.width = "60%"}
+include_graphics(here::here("slides/imgs/bom-heat-map.png"))
+```
 
-- Hue (image)
-- Chroma (image)
-- Luminance (image)
+---
+
+# Protan image (No Red Cone)
+
+```{r protan-bom, out.width = "60%"}
+include_graphics(here::here("slides/imgs/protan_bom-heat-map.png"))
+```
+
+---
+
+# Deutan image (No Green Cone)
+
+```{r deutan-bom, out.width = "60%"}
+include_graphics(here::here("slides/imgs/deutan_bom-heat-map.png"))
+```
+
+---
+
+# Tritan image (No Blue Cone)
+
+```{r tritan-bom, out.width = "60%"}
+include_graphics(here::here("slides/imgs/tritan_bom-heat-map.png"))
+```
+
+---
+
+# Greyscale image
+
+```{r desat-bom, out.width = "60%"}
+include_graphics(here::here("slides/imgs/desaturate_bom-heat-map.png"))
+```
+
+- What is a vocabulary around colour?
+- How do I assess colour?
+- How do I create new colour palettes?
+
+---
+# Colour in graphics
+
+- Something about that grayscale plot was interesting
+- There is a wide vocab that we can use to discuss colour. 
+- We can actually describe what any colour is, using the different values of red, green, and blue. 
+- Example, example
+- But this is hard for us to really imagine and predict
+- For example - determining that the colour, 
+
+---
+# Hue, Chroma, Luminance: Another way to describe colour
+
+```{r show-hcl, out.width = "80%"}
+swatchplot(
+  "Hue"       = sequential_hcl(5, h = c(0, 300), c = c(60, 60), l = 65),
+  "Chroma"    = sequential_hcl(5, h = 0, c = c(100, 0), l = 65, rev = TRUE, power = 1),
+  "Luminance" = sequential_hcl(5, h = 260, c = c(25, 25), l = c(25, 90), rev = TRUE, power = 1),
+  off = 0
+)
+```
+
+
+???
 
 These go by other names, and are just one of a set of many different colour representations (HSV, CIELAB, … ), and the literature on colourspace is wide and vast. These allow us to explore and explain colour in a way that makes sense to human.
 
 These are human readable ways to describe colour, but ultimately get expressed into terms of RGB.
 
-So now, how do we see this?
-
-Well, this is where we get into the neurobiology
-
-How colourblindness actually works  
-
-Neurobiology
-
--Opia vs -omaly
-Opia means total absence
-Omaly means reduced
-Protanopia  = absence of red retinal photoreceptors. 
-Difficulty distinguishing between blue and green colors and also between red and green colors.
-Present in 1% of males.
-Deuteranopia = green (I think?)
-Found in about 1% of the male population.[15]
-Tritanopia = only the red and the green cone pigments are present, with a total absence of blue retinal receptors.
-Can be acquired rather than inherited and can be reversed in some cases.
-On the other end of this, there are tetrachromats, who have an additional red cone, and can perceive colours that others cannot. Pretty cool,
-And if you want to get really into it, animals around the world have many numbers of cones.
-Birds typically have 4 cones
-Dogs have .. cones
-Rather amazingly, the mantis shrimp has 16 cones.
-Highly recommend this episode of Radiolab that unpacks that topic
+--- 
+# Can we describe our previous maps in terms of hue, chroma, luminance?
 
 
-How to evaluate existing colour palettes or images
+---
+# Using `colorspace` to explore colour palettes
 
-Now that we have an understanding of how the human eye works, and how as colour changes, so our rods/cones react more/less. 
+- We can explore some colour palettes using HCL, with the `specplot` function from `colorspace`. 
+
+???
+
+I have the nice colours used in the Australian heat data here, which we can view with `swatchplot` from `colorspace`, or `show_cols` from `scales`
+
+
+---
+# Using HCL to explore palettes: viridis
+
+```{r show-specplot}
+specplot(endtherainbow::bom_viridis_palette)
+```
+
+---
+# Using HCL to explore palettes: BoM
+
+```{r show-specplot-bom}
+specplot(endtherainbow::bom_standard_palette)
+```
+
+---
+# Using HCL to explore palettes: Rainbow
+
+```{r show-specplot-rainbow}
+specplot(rainbow(n = 20))
+```
+
+---
+# Using HCL to explore palettes: Base Terrain
+
+```{r show-specplot-terrain, echo = TRUE, out.width = "20%", fig.show='hold'}
+terrain.colors(n = 20) %>% specplot()
+```
+
+---
+# Using HCL to explore palettes: Better Terrain
+
+```{r show-specplot-better-terrain, echo = TRUE, out.width = "20%", fig.show='hold'}
+scico::scico(n = 20, palette = "oleron") %>% specplot()
+```
+
+---
+# Using HCL to explore palettes: Jet
+
+```{r show-specplot-jet, echo = TRUE}
+pals::jet(n = 20) %>% specplot()
+```
+
+---
+# Other ways to assess colorblindness
+
+- CVD simulators: `protan`, `deutan`, `tritan`
+
+```{r}
+terrain.colors(n = 20) %>% protan() %>% specplot()
+terrain.colors(n = 20) %>% deutan() %>% specplot()
+terrain.colors(n = 20) %>% tritan() %>% specplot()
+scico::scico(n = 20, palette = "oleron") %>% protan() %>% specplot()
+scico::scico(n = 20, palette = "oleron") %>% deutan() %>% specplot()
+scico::scico(n = 20, palette = "oleron") %>% tritan() %>% specplot()
+pals::jet(n = 20) %>% protan() %>% specplot()
+pals::jet(n = 20) %>% deutan() %>% specplot()
+pals::jet(n = 20) %>% tritan() %>% specplot()
+```
+
+---
+# How to evaluate existing colour palettes or images
 
 Colourspace
-Demoplot
+
 Choose_color / hcl_color_picker
 Cvd_emulator
 Use hclwizard
 
+Circle back to the BoM plot
+Describe how we could improve it
 
 Create better ones that are accessible to all
 
 This is going to be biased towards R
+
+---
+# Types of palettes
+
+- Qualitative
+- Sequential
+- Diverging
+
+---
+# Qualitative - in specplot
+
+```{r qual-specplot}
+specplot(qualitative_hcl(n = 6))
+```
+
+
+---
+# Sequential: specplot
+
+```{r seq-specplot}
+specplot(sequential_hcl(n = 7))
+```
+
+---
+# Multi Sequential: specplot
+
+```{r seq-multi-specplot}
+specplot(sequential_hcl(h1 = 0, h2 = 300, n = 7))
+```
+
+---
+# Diverging: specplot
+
+```{r div-specplot}
+specplot(diverging_hcl(n = 7))
+```
+
+---
+
+# Some recommended colour palettes
+
+- colorspace
+- viridis
+- scico
+
+---
+
+# Viewing your colour palette
+
+- colorspace::demoplot
+
+---
+
+```{r specplot-bom-viridis}
+specplot(endtherainbow::bom_viridis_palette)
+```
+
+---
+
+```{r specplot-bom-standard}
+specplot(endtherainbow::bom_standard_palette)
+```
+
+---
+# Perceiving colourblindness with cvd_emulator
+
+---
+# Creating your own colour palette with `colorspace`
+
+1. Decide what type of palette you want (Sequential, Diverging, etc)
+2. Decide what colours you want to go through
+
+---
+# Example: HCL
+
+1. Decide what type of palette you want (Sequential, Diverging, etc)
+2. Decide what colours you want to go through
+
+
+---
+# Example: HCL - what is Hue?
+
+```{r}
+# Maybe turn this into a pie chart...
+df <- data.frame(
+  y = 1,
+  hue = 0:360)
+
+ggplot(df, aes(x = hue,
+               y = y,
+               fill = as.factor(hue),
+               colour = as.factor(hue))) + 
+  geom_col() +
+  scale_fill_hue() +
+  theme(legend.position = "none") +
+  # xlim(c(0, 1))
+  coord_polar()
+
+```
+
+---
+# Use `sequential_hcl` and provide one hue
+
+```{r}
+sequential_hcl(n = 20,
+               h = 300) %>% 
+  specplot()
+```
+
+---
+# Use `sequential_hcl` and provide two hues
+
+```{r}
+sequential_hcl(n = 20,
+               h = c(360, 120),
+               c = c(25, 50, 25),
+               l = c(25, 50, 25)) %>% 
+  specplot()
+```
 
 
 ---
 
 # Take homes
 
----
-
-# Future Directions
-
-.large[
-- More features
-- More features
-- More features
-]
-
----
-
-
-
----
-
-Goals for talk
-Convince people that choosing colour matters
-Show people how to assess their colours
-Show people how to create colour palettes
-
-
-
-
-> I should also say straight off the bat, thanks to Achim Zeileis and the co-authors of the Colorspace package - link - Achim’s talk - link - helped provide a lot of thinking points for this subject.
+- Colour choice matters
+- See colorspace / viridis / scico
+- Assess colours with `colorspace::specplot()`
+- Assess colourblindness with `colorspace::cvd_emulator()`
+- Evaluate your own colour palettes at `hclwizard.com`
+- Choose colour palettes with 
+  - `colorspace::choose_palette()`
+  - `colorspace::choose_color()`
+  - `colorspace::hcl_color_picker()`
 
 ---
 
@@ -357,11 +874,6 @@ Show people how to create colour palettes
 - [How your colorblind and colorweak readers see your colors](https://blog.datawrapper.de/colorblindness-part1/) by [Lisa Charlotte Rose](Part 1 of 3)
 - [What to consider when visualizing data for colorblind readers](https://blog.datawrapper.de/colorblindness-part2/) by [Lisa Charlotte Rose](Part 2 of 3)
 [The Science of Color Perception](https://www.youtube.com/watch?v=poL7nDmqjmk) by [Calder Hanson](https://www.youtube.com/channel/UC7zwxzcgdrjnFkRrLnfN_CA)
-
-
-- So many things
-- So many things
-- So many things
 ]
 
 ---
@@ -383,15 +895,15 @@ Show people how to create colour palettes
 # Learning more
 
 .large[
-`r icon::fa_box_open() ` [package link]()
+`r fa_box_open` [colorspace by Zeileis et al.](http://colorspace.r-forge.r-project.org/index.html)
 
-`r icon::fa('link')` [talk link]()
+`r fa_link` [talk link]()
 
-`r icon::fa_twitter()` nj_tierney
+`r fa_twitter` nj_tierney
 
-`r icon::fa_github()` njtierney
+`r fa_github` njtierney
 
-`r icon::fa_paper_plane()` nicholas.tierney@gmail.com
+`r fa_plane` nicholas.tierney@gmail.com
 
 ]
 
@@ -402,3 +914,103 @@ Show people how to create colour palettes
 .vhuge[
 **End.**
 ]
+
+---
+# Extra content
+
+---
+# Stepping back: How do we use colour in a data analysis
+
+We use colour so that we can understand some other dimension of the data.
+
+For example.
+
+What are the components of the graphic?
+
+X axis...y axis...colour, how these map onto a graphic
+
+---
+# Fullscreen gif of colours that change, but are (pretty much) exactly the same colour for people with colourblindness.
+
+---
+Neurobiology
+
+On the other end of this, there are tetrachromats, who have an additional red cone, and can perceive colours that others cannot. Pretty cool,
+
+And if you want to get really into it, animals around the world have many numbers of cones.
+
+Birds typically have 4 cones
+Dogs have .. cones
+
+Rather amazingly, the mantis shrimp has 16 cones.
+
+Highly recommend [this episode of Radiolab]() that unpacks that topic
+
+---
+
+
+```{r}
+
+```
+
+http://hclwizard.org/
+
+My own questions
+
+- What do the hex values actually mean?
+- What are the ranges of the hue values (0-360 or -360,360)
+- What are the ranges of the chroma values (0-100)
+- What are the ranges of the luminance values (0-100)
+  - Note that the chroma/luminance values can change
+  - the possible combinations of chroma and luminance in HCL space depend on hue
+
+
+Let's say you have two colours, red and green. Here is what non-colourblind people see:
+
+```{r plot-red-green, fig.height = 3}
+red_green <- prismatic::colour(c("red", "darkgreen"))
+p_img(red_green, "Red & Green")
+```
+
+---
+# Colourblindness, why does it matter? 
+
+But if you have colourblindness, you might see something like the following:
+
+```{r plot-many-red-green, fig.height = 3, fig.width = 2}
+red_green_dt <- colorspace::deutan(red_green)
+red_green_pt <- colorspace::protan(red_green)
+red_green_tt <- colorspace::tritan(red_green)
+
+p_img(red_green_pt, "Red & Green for Protan")
+p_img(red_green_dt, "Red & Green for Deutan")
+p_img(red_green_tt, "Red & Green for Tritan")
+```
+
+
+---
+
+```{r scales-plot-many-red-green, fig.height = 3, fig.width = 2}
+show_col(red_green, labels = FALSE)
+show_col(red_green_pt, labels = FALSE)
+show_col(red_green_dt, labels = FALSE)
+show_col(red_green_tt, labels = FALSE)
+```
+
+
+---
+
+Downsides to RGB:
+
+perceptually uniform (a unit step within RGB does
+not produce a constant perceptual change in color)
+
+> I should also say straight off the bat, thanks to Achim Zeileis and the co-authors of the Colorspace package - link - Achim’s talk - link - helped provide a lot of thinking points for this subject.
+
+---
+# Example, RGB vs HCL
+
+```{r}
+specplot(qualitative_hcl(n = 6),
+         rgb = TRUE)
+```
