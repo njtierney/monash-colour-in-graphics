@@ -1,8 +1,8 @@
 ---
-title: 'Awesome title'
-subtitle: "subtitle"  
+title: 'The use of colour in graphics. '
+subtitle: "A journey through the body & mind to the screen"  
 author: "<span style = 'font-size: 90%;'>Nicholas Tierney, Monash University</span>"
-date: "<span style = 'font-size: 90%;'>CONFERENCE <br><br> MONDAY 1st January, 1920 </span> <br><br> `r #icon::fa('link')` [LINK]() <br><br>`r #icon::fa('twitter')` [nj_tierney](https://twitter.com/nj_tierney)"
+date: "<span style = 'font-size: 90%;'>Monash Data Fluency <br><br> Friday 26th June, 2020 </span> <br><br> `r #icon::fa('link')` [LINK]() <br><br>`r #icon::fa('twitter')` [nj_tierney](https://twitter.com/nj_tierney)"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -99,11 +99,205 @@ class: inverse, middle, center
 
 ---
 
-# Background
+```{r show-bom, echo = FALSE}
+bom_map_link <- here::here("slides/imgs/bom-heat-map.png")
+include_graphics(bom_map_link)
+```
+
+???
+ 
+The inspiration for this talk comes from this graphic
+
+---
+# A few reasons that I don't like it
+
+.left-code[
+- It is hard to see what is interesting.
+- It is not colourblind safe.
+- It is not perceptually uniform
+]
+
+.right-plot[
+```{r show-bom-again}
+include_graphics(bom_map_link)
+```
+
+]
+
+---
+# Better map
+
+***
+
+???
+
+Sometimes the conversation ends there, and you provide them a few graphics that look better. Like this.
+
+---
+# But why is this better?
+
+Some typical responses to this are:
+
+- It's colourblind safe
+- It's perceptually uniform
+- It can be turned to grayscale
+
+--
+
+But what do those terms mean? And how can we use our understanding of that to create better graphics?
+
+???
+
+This made sense to me, I know what colourblindness is, and I know what perceptually uniform means.
+
+But I also have an honours degree in Psychological Science. My honours project studied the human visual system, in an area called psychophysics. I didn’t study colour, but we did need to learn about the visual system in neuropsychology.
+
+---
+# Goals for this talk:
+
+- Convince you that colour choice matters
+- Demonstrate how to assess colours
+- How to create colour palettes
+
+---
+# What does colourblind safe mean?
+
+---
+# Fullscreen gif of colours that change, but are (pretty much) exactly the same colour for people with colourblindness.
+
+
+---
+# Stepping back: How do we use colour in a data analysis
+
+We use colour so that we can understand some other dimension of the data.
+
+For example.
+
+What are the components of the graphic?
+
+X axis...y axis...colour, how these map onto a graphic
+
+---
+# Stepping back again: What even **is** colour?
+
+---
+# Colour = Waves of light, perceived as colour.
+
+This combines physics, biology, and a bit of philosophy. 
+
+- Just like there are soundwaves that you can hear
+- There are lightwaves that we see
+
+(Disclaimer: This is a brief introduction into a complex topic)
+---
+# Physics of Colour
+
+- These lightwaves come in different shapes - different wavelengths
+
+Short
+
+Medium
+
+Long
+
+---
+# Physics of Colour
+
+We can plot the visible spectrum like so:
+
+- At this end we have the longest wavelengths
+- At this end we have the shortest wavelengths
+
+---
+# Physics of Colour
+
+- Lightwaves enter our eyes, and we have the perception of colour.
+  - longer wavelengths = "red"
+  - Shorter wavelengths = "purple"
+
+- How? Rods and Cones. Let's only talk about cones though.
+
+(Disclaimer: This is a brief introduction into a complex topic)
+
+---
+# Biology of colour
+
+- I we get only one type of colour entering in the eye, we get one colour.
+- This is because of these three cones:
+
+  - Red Cone - likes longer wavelengths
+  - Green Cone - likes medium wavelengths
+  - Blue cone - likes shorter wavelengths
+  
+- We can actually plot how sensitive each of these cones are like so:
+
+---
+# 
+
+
+---
+# The light that we don't see
+
+There are lightwaves that we cannot see - we are only seeing a small slice of 
+the spectrum of light.
+
+Different wavelengths reflecting off of surfaces at different speeds, which we see differently?
 
 ---
 
-Put More slides here.
+So now that we understand what colourblindness is, let's discuss what this means for graphics.
+
+We need some different terminology, that will allow us to better discuss colour for this purpose.
+
+- Hue (image)
+- Chroma (image)
+- Luminance (image)
+
+These go by other names, and are just one of a set of many different colour representations (HSV, CIELAB, … ), and the literature on colourspace is wide and vast. These allow us to explore and explain colour in a way that makes sense to human.
+
+These are human readable ways to describe colour, but ultimately get expressed into terms of RGB.
+
+So now, how do we see this?
+
+Well, this is where we get into the neurobiology
+
+How colourblindness actually works  
+
+Neurobiology
+
+-Opia vs -omaly
+Opia means total absence
+Omaly means reduced
+Protanopia  = absence of red retinal photoreceptors. 
+Difficulty distinguishing between blue and green colors and also between red and green colors.
+Present in 1% of males.
+Deuteranopia = green (I think?)
+Found in about 1% of the male population.[15]
+Tritanopia = only the red and the green cone pigments are present, with a total absence of blue retinal receptors.
+Can be acquired rather than inherited and can be reversed in some cases.
+On the other end of this, there are tetrachromats, who have an additional red cone, and can perceive colours that others cannot. Pretty cool,
+And if you want to get really into it, animals around the world have many numbers of cones.
+Birds typically have 4 cones
+Dogs have .. cones
+Rather amazingly, the mantis shrimp has 16 cones.
+Highly recommend this episode of Radiolab that unpacks that topic
+
+
+How to evaluate existing colour palettes or images
+
+Now that we have an understanding of how the human eye works, and how as colour changes, so our rods/cones react more/less. 
+
+Colourspace
+Demoplot
+Choose_color / hcl_color_picker
+Cvd_emulator
+Use hclwizard
+
+
+Create better ones that are accessible to all
+
+This is going to be biased towards R
+
 
 ---
 
@@ -121,26 +315,35 @@ Put More slides here.
 
 ---
 
-# Test
 
-.small[small]
-.
+
+---
+
+Goals for talk
+Convince people that choosing colour matters
+Show people how to assess their colours
+Show people how to create colour palettes
+
+
+
+
+> I should also say straight off the bat, thanks to Achim Zeileis and the co-authors of the Colorspace package - link - Achim’s talk - link - helped provide a lot of thinking points for this subject.
 
 ---
 
 # Thanks
 
 .large.pull-left[
-- So many great people
-- So many great people
-- So many great people
-- So many great people
+- Adam Sparks
+- Nonie Finlayson
+- Philip Groce
+- Stuart Lee
 ]
 
 .large.pull-right[
-- So many great people
-- So many great people
-- So many great people
+- Di Cook
+- Miles McBain
+- Achim Zieleis
 - So many great people
 ]
 
@@ -149,7 +352,13 @@ Put More slides here.
 # Resources
 
 .large[
-- So many things
+- [Colorspace by Zeilies et al]()
+- [Colorspace talk by Achim Zeilies]()
+- [How your colorblind and colorweak readers see your colors](https://blog.datawrapper.de/colorblindness-part1/) by [Lisa Charlotte Rose](Part 1 of 3)
+- [What to consider when visualizing data for colorblind readers](https://blog.datawrapper.de/colorblindness-part2/) by [Lisa Charlotte Rose](Part 2 of 3)
+[The Science of Color Perception](https://www.youtube.com/watch?v=poL7nDmqjmk) by [Calder Hanson](https://www.youtube.com/channel/UC7zwxzcgdrjnFkRrLnfN_CA)
+
+
 - So many things
 - So many things
 - So many things
@@ -185,6 +394,7 @@ Put More slides here.
 `r icon::fa_paper_plane()` nicholas.tierney@gmail.com
 
 ]
+
 
 
 ---

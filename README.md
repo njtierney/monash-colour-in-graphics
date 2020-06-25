@@ -1,9 +1,13 @@
-# Nick's Slide Template (replace with talk title)
+# The use of colour in graphics. A journey through the body & mind to the screen
 <!-- NETLIFY BADGE SHOULD GO HERE-->
 
-This is a slide template I have put on github so that I can get started with talks easier.
-
 # Abstract
+
+Data is everywhere, and we typically make sense of it in the form of data visualisation. But how do we know what we see is the same as everyone else? It turns out not everyone is the same, and colour vision deficiencies (such as colourblindness) are not uncommon. This talk unpacks some of the physiology of the human visual system, so that we can understand how to better visualise data. Specifically, in this talk I explain how:  
+
+* Colourblindness actually works  
+* We can evaluate existing colour palettes or images
+* Create better ones that are accessible to all
 
 # Slide available [here](https://bit.ly/FILL-ME-IN)
 
