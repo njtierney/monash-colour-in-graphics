@@ -60,49 +60,14 @@ library(colorblindr)
 ```
 
 ```{r fun-tidy-photowave}
-read_tidy_photowave <- function(path){
-  readr::read_csv(file = path,
-                  col_names = c("wavelength_nm",
-                                "cone_s",
-                                "cone_m",
-                                "cone_l")) %>% 
-  tidyr::pivot_longer(cols = cone_s:cone_l,
-                      names_to = "type",
-                      values_to = "response")
-}
-
-# data provided from http://cvrl.ucl.ac.uk/cones.htm
-# 10-deg fundamentals based on the Stiles & Burch 10-deg CMFs
-  # units: energy (linear)
-  # stepsize: 0.1 nm
-  # Format: csv
-
-cone_response <- read_tidy_photowave(
-  here::here("slides/data/linss2_10e_fine.csv")
-)
+loadd(cone_response)
 ```
-
-```{r funs-p-img}
-p_img <- function(obj, nam) {
-  image(1:length(obj), 1, as.matrix(1:length(obj)), col=obj, 
-        main = nam, ylab = "", xaxt = "n", yaxt = "n",  bty = "n")
-}
-```
-
 
 ```{r helpers, include=FALSE}
-mp4_vid <- function(src){
-  HTML(
-    paste0(
-      '<video autoplay>
-        <source src="', src, '" type="video/mp4">
-      </video>'
-    )
-  )
-}
 
-fig.fullsize <- c(fig.height = 3.5, fig.width = 8, out.width = "150%"
-)
+fig.fullsize <- c(fig.height = 3.5, 
+                  fig.width = 8, 
+                  out.width = "150%")
 
 as_table <- function(...) knitr::kable(..., format='html', digits = 3)
 
@@ -167,7 +132,7 @@ gg_cone_receptor_omit <- function(cone_response, cone_type){
 # Your turn: What makes this graphic good, and bad?
 
 ```{r show-bom}
-include_graphics(here::here("slides/imgs/bom-heat-map.png"))
+include_graphics("imgs/bom-heat-map.png")
 ```
 
 ---
@@ -224,7 +189,7 @@ map_high_temp_bom + map_high_temp_viridis + jet_map
 
 .left-code[
 ```{r show-bom-again-again}
-include_graphics(here::here("slides/imgs/bom-heat-map.png"))
+include_graphics("imgs/bom-heat-map.png")
 ```
 ]
 
@@ -295,7 +260,7 @@ This combines physics, biology, and a bit of philosophy.
 These lightwaves come in different shapes - different wavelengths:
 
 ```{r wavelengths, out.width = "60%"}
-include_graphics(here::here("slides/imgs/wave-sml-trim.png"))
+include_graphics("imgs/wave-sml-trim.png")
 ```
 
 
@@ -316,7 +281,7 @@ gg_colour_spectra(cone_response)
 # Physics of Colour (More than we can see)
 
 ```{r show-em, out.width = "80%"}
-include_graphics(here::here("slides/imgs/em-spectrum.svg"))
+include_graphics("imgs/em-spectrum.svg")
 ```
 
 > From https://commons.wikimedia.org/wiki/File:EM_spectrum.svg 
@@ -333,7 +298,7 @@ include_graphics(here::here("slides/imgs/em-spectrum.svg"))
 # Physics of Colour
 
 ```{r eyes-cones, out.width = "60%"}
-include_graphics(here::here("slides/imgs/eye-cones-trim.png"))
+include_graphics("imgs/eye-cones-trim.png")
 ```
 
 
@@ -351,7 +316,7 @@ include_graphics(here::here("slides/imgs/eye-cones-trim.png"))
 # Biology of colour: cones
 
 ```{r show-cones, out.width = "60%"}
-include_graphics(here::here("slides/imgs/cone-family-trim.png"))
+include_graphics("imgs/cone-family-trim.png")
 ```
   
 ???
@@ -377,7 +342,7 @@ cone_response %>% gg_cone_receptor()
 # How do we see colour? Blue?
 
 ```{r perception, out.width = "60%"}
-include_graphics(here::here("slides/imgs/perception-trim.png"))
+include_graphics("imgs/perception-trim.png")
 ```
 
 
@@ -619,7 +584,7 @@ cvd_emulator("imgs/bom-heat-map.png")
 # Original image
 
 ```{r og-bom, out.width = "60%"}
-include_graphics(here::here("slides/imgs/bom-heat-map.png"))
+include_graphics("imgs/bom-heat-map.png")
 ```
 
 ---
@@ -627,7 +592,7 @@ include_graphics(here::here("slides/imgs/bom-heat-map.png"))
 # Protan image (No Red Cone)
 
 ```{r protan-bom, out.width = "60%"}
-include_graphics(here::here("slides/imgs/protan_bom-heat-map.png"))
+include_graphics("imgs/protan_bom-heat-map.png")
 ```
 
 ---
@@ -635,7 +600,7 @@ include_graphics(here::here("slides/imgs/protan_bom-heat-map.png"))
 # Deutan image (No Green Cone)
 
 ```{r deutan-bom, out.width = "60%"}
-include_graphics(here::here("slides/imgs/deutan_bom-heat-map.png"))
+include_graphics("imgs/deutan_bom-heat-map.png")
 ```
 
 ---
@@ -643,7 +608,7 @@ include_graphics(here::here("slides/imgs/deutan_bom-heat-map.png"))
 # Tritan image (No Blue Cone)
 
 ```{r tritan-bom, out.width = "60%"}
-include_graphics(here::here("slides/imgs/tritan_bom-heat-map.png"))
+include_graphics("imgs/tritan_bom-heat-map.png")
 ```
 
 ---
@@ -651,7 +616,7 @@ include_graphics(here::here("slides/imgs/tritan_bom-heat-map.png"))
 # Greyscale image
 
 ```{r desat-bom, out.width = "60%"}
-include_graphics(here::here("slides/imgs/desaturate_bom-heat-map.png"))
+include_graphics("imgs/desaturate_bom-heat-map.png")
 ```
 
 - What is a vocabulary around colour?
@@ -664,7 +629,7 @@ include_graphics(here::here("slides/imgs/desaturate_bom-heat-map.png"))
 
 .pull-left[
 ```{r desat-bom-again}
-include_graphics(here::here("slides/imgs/desaturate_bom-heat-map.png"))
+include_graphics("imgs/desaturate_bom-heat-map.png")
 ```
 
 ]
@@ -701,7 +666,7 @@ gplots::col2hex(c("red", "pink",
 
 .pull-left[
 ```{r full-bom-again}
-include_graphics(here::here("slides/imgs/bom-heat-map.png"))
+include_graphics("imgs/bom-heat-map.png")
 ```
 
 ]
@@ -749,7 +714,7 @@ These are human readable ways to describe colour, but ultimately get expressed i
 
 .pull-left[
 ```{r colourspace-fig-web}
-include_graphics(here::here("slides/imgs/colorspace-website.png"))
+include_graphics("imgs/colorspace-website.png")
 ```
 
 ]
@@ -757,7 +722,7 @@ include_graphics(here::here("slides/imgs/colorspace-website.png"))
 .pull-right[
 
 ```{r colourspace-fig-paper}
-include_graphics(here::here("slides/imgs/colorspace-paper.png"))
+include_graphics("imgs/colorspace-paper.png")
 ```
 
 ]

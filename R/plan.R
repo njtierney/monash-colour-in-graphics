@@ -6,6 +6,7 @@ the_plan <-
     map_high_temp_bom = add_bom_scale(map_high_temp),
     map_high_temp_viridis = add_viridis_scale(map_high_temp),
     cvd_bom_map = colorspace::cvd_emulator("slides/imgs/bom-heat-map.png"),
+    cone_response = read_tidy_photowave("slides/data/linss2_10e_fine.csv"),
     # render the gganimate drawings?
     # render the slide deck as well?
     
