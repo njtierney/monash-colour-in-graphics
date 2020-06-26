@@ -9,7 +9,7 @@ Data is everywhere, and we typically make sense of it in the form of data visual
 * We can evaluate existing colour palettes or images
 * Create better ones that are accessible to all
 
-# Slide available [here](https://bit.ly/FILL-ME-IN)
+# Slide available [here](https://bit.ly/njt-monash-colour)
 
 # Take home messages 
 

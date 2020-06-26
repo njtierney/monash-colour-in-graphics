@@ -1089,7 +1089,7 @@ hcl_palettes("diverging", plot = TRUE)
 .large[
 `r icon::fontawesome(name = "box-open", "solid") ` [colorspace by Zeileis et al.](http://colorspace.r-forge.r-project.org/index.html)
 
-`r icon::fontawesome$solid$link` [bit.ly/njt-monash-colour]()
+`r icon::fontawesome$solid$link` [bit.ly/njt-monash-colour](https://bit.ly/njt-monash-colour)
 
 `r icon::fontawesome$brands$twitter` nj_tierney
 
