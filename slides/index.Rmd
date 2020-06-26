@@ -821,14 +821,14 @@ specplot(qualitative_hcl(n = 6))
 
 
 ---
-# Sequential: Colours go low - high / high - low
+# Sequential: Colours go low - high
 
 ```{r seq-specplot}
 specplot(sequential_hcl(n = 7))
 ```
 
 ---
-# Multi Sequential
+# Sequential: Multiple hues
 
 ```{r seq-multi-specplot}
 specplot(sequential_hcl(h1 = 0, h2 = 300, n = 7))
@@ -998,7 +998,7 @@ hcl_palettes("diverging", plot = TRUE)
  - `qualitative_hcl`
  - `sequential_hcl`
  - `diverging_hcl`
-- Pick the hue/chroma/luminance to travel through: 
+- Pick the hue/chroma/luminance you want to travel through
 
 ---
 # A workflow for choosing a colour palette
@@ -1009,14 +1009,8 @@ hcl_palettes("diverging", plot = TRUE)
   - Sequential: Does the value go from low to high?
   - Diverging: Does it have a natural balance/zero point?
 1. Check colourblindness: `check_color_blindness`
-1. Explore colour with `specplot`
-1. Explore how it looks with `demoplot`
-
-
----
-# Some recommended practices for trying out a new colour palette
-
-- Use `specplot` on the colour palette to explore whether the colour is changing how you think it is
+1. Explore colour with `specplot` (combine with `protan` and friends)
+1. Explore how it looks with `demoplot`  (combine with `protan` and friends)
 
 
 ---
@@ -1050,7 +1044,7 @@ hcl_palettes("diverging", plot = TRUE)
 .large.pull-right[
 - Di Cook
 - Achim Zeileis
-- Emil 
+- Emil Hvitfeldt
 ]
 
 ---
@@ -1060,7 +1054,7 @@ hcl_palettes("diverging", plot = TRUE)
 .large[
 - [Colorspace by Zeileis et al]()
 - [Colorspace talk by Achim Zeileis]()
-- - http://hclwizard.org/
+- http://hclwizard.org/
 - [How your colorblind and colorweak readers see your colors](https://blog.datawrapper.de/colorblindness-part1/) by [Lisa Charlotte Rose](Part 1 of 3)
 - [What to consider when visualizing data for colorblind readers](https://blog.datawrapper.de/colorblindness-part2/) by [Lisa Charlotte Rose](Part 2 of 3)
 ]
@@ -1070,9 +1064,8 @@ hcl_palettes("diverging", plot = TRUE)
 # Resources
 
 .large[
-[The Science of Color Perception](https://www.youtube.com/watch?v=poL7nDmqjmk) by [Calder Hanson](https://www.youtube.com/channel/UC7zwxzcgdrjnFkRrLnfN_CA)
+- [The Science of Color Perception](https://www.youtube.com/watch?v=poL7nDmqjmk) by [Calder Hanson](https://www.youtube.com/channel/UC7zwxzcgdrjnFkRrLnfN_CA)
 - [Radiolab episode on colour vision]() 
-
 ]
 
 ---

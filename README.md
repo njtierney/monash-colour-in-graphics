@@ -13,9 +13,18 @@ Data is everywhere, and we typically make sense of it in the form of data visual
 
 # Take home messages 
 
-1. Point one
-1. Point two
-1. Point three
+- Colour choice matters
+- Choosing colours is hard
+- We can use Hue / Chroma / Luminance to describe colour
+- See established palettes: colorspace / viridis / scico
+- Assess colours with `colorspace::specplot()`
+- Assess colourblindness with `colorspace::cvd_emulator()`
+- Evaluate your own colour palettes at `hclwizard.com`
+- Choose colour palettes with 
+  - `colorspace::choose_palette()`
+  - `colorspace::choose_color()`
+  - `colorspace::hcl_color_picker()`
+  - `colorspace::hcl_wizard()`
 
 # Thanks
 
