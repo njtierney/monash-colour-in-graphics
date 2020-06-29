@@ -40,10 +40,30 @@ pal_to_png <- function(pal, file = "bom-heat-hcl.png", rev = FALSE) {
   png::writePNG(ret, target = file)
 }
 
-pal_to_png(           pal_ylorrd,   "bom-heat-hcl-ylorrd.png")
-pal_to_png(desaturate(pal_ylorrd),  "bom-heat-hcl-ylorrd-gray.png")
-pal_to_png(    deutan(pal_ylorrd),  "bom-heat-hcl-ylorrd-deutan.png")
+pal_to_png(           pal_ylorrd,   here::here("slides",
+                                               "imgs",
+                                               "bom-heat-hcl-ylorrd.png"))
+pal_to_png(desaturate(pal_ylorrd),  
+           here::here("slides",
+                      "imgs",
+                      "bom-heat-hcl-ylorrd-gray.png"))
+pal_to_png(    deutan(pal_ylorrd),  
+               here::here("slides",
+                          "imgs",
+                          "bom-heat-hcl-ylorrd-deutan.png"))
 
-pal_to_png(           pal_inferno,  "bom-heat-hcl-inferno.png", rev = TRUE)
-pal_to_png(desaturate(pal_inferno), "bom-heat-hcl-inferno-gray.png", rev = TRUE)
-pal_to_png(    deutan(pal_inferno), "bom-heat-hcl-inferno-deutan.png", rev = TRUE)
+pal_to_png(           pal_inferno,  
+                      here::here("slides",
+                                 "imgs",
+                                 "bom-heat-hcl-inferno.png"), 
+                      rev = TRUE)
+pal_to_png(desaturate(pal_inferno), 
+           here::here("slides",
+                      "imgs",
+                      "bom-heat-hcl-inferno-gray.png"), 
+           rev = TRUE)
+pal_to_png(    deutan(pal_inferno), 
+               here::here("slides",
+                          "imgs",
+                          "bom-heat-hcl-inferno-deutan.png"), 
+               rev = TRUE)
