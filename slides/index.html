@@ -37,6 +37,9 @@ layout: true
 
 
 
+
+
+
 ---
 
 # Your turn: What makes this graphic good, and bad?
@@ -745,16 +748,17 @@ hcl_palettes("diverging", plot = TRUE)
 # Thanks
 
 .large.pull-left[
-- Adam Sparks
-- Philip Grove
-- Stuart Lee
-- Miles McBain
+- [Adam Sparks](https://adamhsparks.com/)
+- [Lisa Charlotte Rost](https://twitter.com/lisacrost)
+- [Philip Grove](http://researchers.uq.edu.au/researcher/1637)
+- [Miles McBain](https://milesmcbain.xyz/)
 ]
 
 .large.pull-right[
-- Di Cook
-- Achim Zeileis
-- Emil Hvitfeldt
+- [Di Cook](http://dicook.org/)
+- [Stuart Lee](https://stuartlee.org/)
+- [Achim Zeileis](https://eeecon.uibk.ac.at/~zeileis/)
+- [Emil Hvitfeldt](https://www.hvitfeldt.me/about/)
 ]
 
 ---
@@ -762,20 +766,21 @@ hcl_palettes("diverging", plot = TRUE)
 # Resources
 
 .large[
-- [Colorspace by Zeileis et al]()
-- [Colorspace talk by Achim Zeileis]()
-- http://hclwizard.org/
-- [How your colorblind and colorweak readers see your colors](https://blog.datawrapper.de/colorblindness-part1/) by [Lisa Charlotte Rost](https://lisacharlotterost.de/)
-- [What to consider when visualizing data for colorblind readers](https://blog.datawrapper.de/colorblindness-part2/) by [Lisa Charlotte Rost](https://lisacharlotterost.de/)
+- [Colorspace Package by Zeileis et al](http://colorspace.r-forge.r-project.org/index.html)
+- [Colorspace Paper by Zeileis et al](https://arxiv.org/abs/1903.06490)
+- [Colorspace talk by Achim Zeileis](https://www.youtube.com/watch?v=6bv2IAcNE_c)
+- http://hclwizard.org/ website for assessing colour
+
 ]
 
 ---
-
 # Resources
 
 .large[
+- [How your colorblind and colorweak readers see your colors](https://blog.datawrapper.de/colorblindness-part1/) (Part 1 of 3) by [Lisa Charlotte Rost](https://twitter.com/lisacrost)
+- [What to consider when visualizing data for colorblind readers](https://blog.datawrapper.de/colorblindness-part2/) (Part 2 of 3) by [Lisa Charlotte Rost](https://twitter.com/lisacrost)
 - [The Science of Color Perception](https://www.youtube.com/watch?v=poL7nDmqjmk) by [Calder Hanson](https://www.youtube.com/channel/UC7zwxzcgdrjnFkRrLnfN_CA)
-- [Radiolab episode on colour vision]() 
+- [Radiolab episode on colour vision](https://www.wnycstudios.org/podcasts/radiolab/articles/rippin-the-rainbow-an-even-newer-one) 
 ]
 
 ---
@@ -819,34 +824,208 @@ hcl_palettes("diverging", plot = TRUE)
 # Workflows
 
 ---
-# Explore palettes with specplot: Rainbow + protan
+# Explore rainbow palette with specplot: Rainbow + specplot
+
+
+```r
+rainbow(n = 20) %&gt;% specplot()
+```
+
+&lt;img src="figures/show-rainbow-specplot-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+# Explore rainbow palette with colorblindness specplot: Rainbow + hclplot
+
+
+```r
+rainbow(n = 20) %&gt;% hclplot()
+```
+
+&lt;img src="figures/show-rainbow-hclplot-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+# Explore rainbow palette with colorblindness specplot: Rainbow + protan + specplot
 
 
 ```r
 rainbow(n = 20) %&gt;% protan() %&gt;% specplot()
 ```
 
-&lt;img src="figures/show-specplot-rainbow-protan-1.png" width="936" style="display: block; margin: auto;" /&gt;
+&lt;img src="figures/show-rainbow-specplot-protan-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
-# Explore palettes with specplot: Rainbow + deutan
+# Explore rainbow palette with colorblindness specplot: Rainbow + protan + hclplot
 
 
 ```r
-rainbow(n = 20) %&gt;% deutan() %&gt;% specplot()
+rainbow(n = 20) %&gt;% protan() %&gt;% hclplot()
 ```
 
-&lt;img src="figures/show-specplot-rainbow-deutan-1.png" width="936" style="display: block; margin: auto;" /&gt;
+&lt;img src="figures/show-rainbow-protan-hclplot-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
-# Explore palettes with specplot: Rainbow + tritan
+# Explore palettes with specplot: Rainbow + demoplot
 
 
 ```r
-rainbow(n = 20) %&gt;% tritan() %&gt;% specplot()
+rainbow(n = 20) %&gt;% demoplot()
 ```
 
-&lt;img src="figures/show-specplot-rainbow-tritan-1.png" width="936" style="display: block; margin: auto;" /&gt;
+&lt;img src="figures/show-rainbow-demoplot-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+# Explore palettes with specplot: Rainbow + protan + demoplot
+
+
+```r
+rainbow(n = 20) %&gt;% protan() %&gt;% demoplot()
+```
+
+&lt;img src="figures/show-rainbow-protan-demoplot-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+# Compare Rainbow to Viridis: specplot
+
+.pull-left[
+
+```r
+rainbow(n = 20) %&gt;% 
+  specplot()
+```
+
+&lt;img src="figures/show-rainbow-viridis-specplot-1-1.png" width="936" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+```r
+pals::viridis(n = 20) %&gt;% 
+  specplot()
+```
+
+&lt;img src="figures/show-rainbow-viridis-specplot-2-1.png" width="936" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Compare Rainbow to Viridis: specplot + protan
+
+.pull-left[
+
+```r
+rainbow(n = 20) %&gt;% 
+  protan() %&gt;% 
+  specplot()
+```
+
+&lt;img src="figures/show-rainbow-viridis-specplot-protan-1-1.png" width="936" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+```r
+pals::viridis(n = 20) %&gt;% 
+  protan() %&gt;% 
+  specplot()
+```
+
+&lt;img src="figures/show-rainbow-viridis-specplot-protan-2-1.png" width="936" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Compare Rainbow to Viridis: hclplot
+
+.pull-left[
+
+```r
+rainbow(n = 20) %&gt;% 
+  hclplot()
+```
+
+&lt;img src="figures/show-rainbow-viridis-hclplot-1-1.png" width="936" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+```r
+pals::viridis(n = 20) %&gt;% 
+  hclplot()
+```
+
+&lt;img src="figures/show-rainbow-viridis-hclplot-2-1.png" width="936" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Compare Rainbow to Viridis: hclplot + protan
+
+.pull-left[
+
+```r
+rainbow(n = 20) %&gt;% 
+  protan() %&gt;% 
+  hclplot()
+```
+
+&lt;img src="figures/show-rainbow-viridis-hclplot-protan-1-1.png" width="936" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+```r
+pals::viridis(n = 20) %&gt;% 
+  protan() %&gt;% 
+  hclplot()
+```
+
+&lt;img src="figures/show-rainbow-viridis-hclplot-protan-2-1.png" width="936" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Compare Rainbow to Viridis: demoplot
+
+.pull-left[
+
+```r
+rainbow(n = 20) %&gt;% 
+  demoplot()
+```
+
+&lt;img src="figures/show-rainbow-viridis-demoplot-1-1.png" width="936" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+```r
+pals::viridis(n = 20) %&gt;% 
+  demoplot()
+```
+
+&lt;img src="figures/show-rainbow-viridis-demoplot-2-1.png" width="936" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Compare Rainbow to Viridis: demoplot + protan
+
+.pull-left[
+
+```r
+rainbow(n = 20) %&gt;% 
+  protan() %&gt;% 
+  demoplot()
+```
+
+&lt;img src="figures/show-rainbow-viridis-demoplot-protan-show-1-1.png" width="936" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+```r
+pals::viridis(n = 20) %&gt;% 
+  protan() %&gt;% 
+  demoplot()
+```
+
+&lt;img src="figures/show-rainbow-viridis-demoplot-protan-show-2-1.png" width="936" style="display: block; margin: auto;" /&gt;
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

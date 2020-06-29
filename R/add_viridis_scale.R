@@ -11,7 +11,7 @@ add_viridis_scale <- function(map_temp) {
 
   map_temp +
     ggplot2::scale_fill_manual(
-      values = endtherainbow::bom_viridis_palette,
+      values = get_bom_viridis_palette(),
       name = "",
       guide = guide_legend(reverse = TRUE)
     )

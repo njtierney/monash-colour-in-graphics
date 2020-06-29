@@ -1,5 +1,7 @@
 the_plan <-
   drake_plan(
+    bom_standard_palette = get_bom_standard_palette(),
+    bom_viridis_palette = get_bom_viridis_palette(),
     fig_map = create_map(),
     high_temp = create_temp(fig_map, date = "2017-02-11"),
     map_high_temp = create_temp_map(high_temp),

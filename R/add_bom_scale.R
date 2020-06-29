@@ -11,7 +11,7 @@ add_bom_scale <- function(map_temp) {
 
   map_temp +
     ggplot2::scale_fill_manual(
-      values = endtherainbow::bom_standard_palette,
+      values = get_bom_standard_palette(),
       name = "",
       guide = guide_legend(reverse = TRUE)
         )

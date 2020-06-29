@@ -20,7 +20,7 @@ create_temp <- function(map, date) {
   colnames(map_mask_crop_df) <- c("long", "lat", "temperature")
 
   # As BOM maps in 3 degree increments, we cut data into these bins.
-  map_mask_crop_df$cuts <- endtherainbow::cut_temps(map_mask_crop_df$temperature)
+  map_mask_crop_df$cuts <- cut_temps(map_mask_crop_df$temperature)
 
   map_mask_crop_df
 

@@ -42,9 +42,14 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r pals}
+loadd(bom_standard_palette)
+loadd(bom_viridis_palette)
+```
+
+
 ```{r library, include = FALSE}
 library(tidyverse)
-library(gganimate)
 library(knitr)
 library(drake)
 library(colorspace)
@@ -740,7 +745,7 @@ include_graphics("imgs/colorspace-paper.png")
 # HCL of BoM plot palette
 
 ```{r specplot-bom-standard-pal}
-specplot(endtherainbow::bom_standard_palette)
+specplot(bom_standard_palette)
 ```
 
 
@@ -754,7 +759,7 @@ I have the nice colours used in the Australian heat data here, which we can view
 
 .pull-left[
 ```{r specplot-bom-standard-pal-again}
-specplot(endtherainbow::bom_standard_palette)
+specplot(bom_standard_palette)
 ```
 ]
 
@@ -812,7 +817,7 @@ specplot(diverging_hcl(n = 7))
 .pull-left[
 
 ```{r specplot-bom-standard-pal-again-again, fig.height = 8}
-specplot(endtherainbow::bom_standard_palette)
+specplot(bom_standard_palette)
 ```
 ]
 
@@ -829,7 +834,7 @@ specplot(endtherainbow::bom_standard_palette)
 BoM
 
 ```{r cvd-bom-standard-pal-again-again, fig.height = 8}
-check_color_blindness(endtherainbow::bom_standard_palette)
+check_color_blindness(bom_standard_palette)
 ```
 ]
 
@@ -837,7 +842,7 @@ check_color_blindness(endtherainbow::bom_standard_palette)
 Viridis 
 
 ```{r cvd-bom-viridis-pal-again-again, fig.height = 8}
-check_color_blindness(endtherainbow::bom_viridis_palette)
+check_color_blindness(bom_viridis_palette)
 ```
 ]
 
@@ -847,13 +852,13 @@ check_color_blindness(endtherainbow::bom_viridis_palette)
 
 .pull-left[
 ```{r specplot-bom-standard-pal-again-again2, fig.height = 8}
-specplot(endtherainbow::bom_standard_palette)
+specplot(bom_standard_palette)
 ```
 ]
 
 .pull-right[
 ```{r specplot-bom-viridis-pal-again-again2, fig.height = 8}
-specplot(endtherainbow::bom_viridis_palette)
+specplot(bom_viridis_palette)
 ```
 ]
 
@@ -862,7 +867,7 @@ specplot(endtherainbow::bom_viridis_palette)
 
 .pull-left[
 ```{r specplot-bom-viridis-pal-again-again}
-specplot(endtherainbow::bom_viridis_palette)
+specplot(bom_viridis_palette)
 ```
 ]
 
@@ -1000,16 +1005,17 @@ hcl_palettes("diverging", plot = TRUE)
 # Thanks
 
 .large.pull-left[
-- Adam Sparks
-- Philip Grove
-- Stuart Lee
-- Miles McBain
+- [Adam Sparks](https://adamhsparks.com/)
+- [Lisa Charlotte Rost](https://twitter.com/lisacrost)
+- [Philip Grove](http://researchers.uq.edu.au/researcher/1637)
+- [Miles McBain](https://milesmcbain.xyz/)
 ]
 
 .large.pull-right[
-- Di Cook
-- Achim Zeileis
-- Emil Hvitfeldt
+- [Di Cook](http://dicook.org/)
+- [Stuart Lee](https://stuartlee.org/)
+- [Achim Zeileis](https://eeecon.uibk.ac.at/~zeileis/)
+- [Emil Hvitfeldt](https://www.hvitfeldt.me/about/)
 ]
 
 ---
@@ -1017,20 +1023,21 @@ hcl_palettes("diverging", plot = TRUE)
 # Resources
 
 .large[
-- [Colorspace by Zeileis et al]()
-- [Colorspace talk by Achim Zeileis]()
-- http://hclwizard.org/
-- [How your colorblind and colorweak readers see your colors](https://blog.datawrapper.de/colorblindness-part1/) by [Lisa Charlotte Rose](Part 1 of 3)
-- [What to consider when visualizing data for colorblind readers](https://blog.datawrapper.de/colorblindness-part2/) by [Lisa Charlotte Rose](Part 2 of 3)
+- [Colorspace Package by Zeileis et al](http://colorspace.r-forge.r-project.org/index.html)
+- [Colorspace Paper by Zeileis et al](https://arxiv.org/abs/1903.06490)
+- [Colorspace talk by Achim Zeileis](https://www.youtube.com/watch?v=6bv2IAcNE_c)
+- http://hclwizard.org/ website for assessing colour
+
 ]
 
 ---
-
 # Resources
 
 .large[
+- [How your colorblind and colorweak readers see your colors](https://blog.datawrapper.de/colorblindness-part1/) (Part 1 of 3) by [Lisa Charlotte Rost](https://twitter.com/lisacrost)
+- [What to consider when visualizing data for colorblind readers](https://blog.datawrapper.de/colorblindness-part2/) (Part 2 of 3) by [Lisa Charlotte Rost](https://twitter.com/lisacrost)
 - [The Science of Color Perception](https://www.youtube.com/watch?v=poL7nDmqjmk) by [Calder Hanson](https://www.youtube.com/channel/UC7zwxzcgdrjnFkRrLnfN_CA)
-- [Radiolab episode on colour vision]() 
+- [Radiolab episode on colour vision](https://www.wnycstudios.org/podcasts/radiolab/articles/rippin-the-rainbow-an-even-newer-one) 
 ]
 
 ---
@@ -1074,22 +1081,151 @@ hcl_palettes("diverging", plot = TRUE)
 # Workflows
 
 ---
-# Explore palettes with specplot: Rainbow + protan
+# Explore rainbow palette with specplot: Rainbow + specplot
 
-```{r show-specplot-rainbow-protan, echo = TRUE, fig.height = 4}
+```{r show-rainbow-specplot, echo = TRUE, out.width = "60%"}
+rainbow(n = 20) %>% specplot()
+```
+
+---
+# Explore rainbow palette with colorblindness specplot: Rainbow + hclplot
+
+```{r show-rainbow-hclplot, echo = TRUE, out.width = "60%"}
+rainbow(n = 20) %>% hclplot()
+```
+
+---
+# Explore rainbow palette with colorblindness specplot: Rainbow + protan + specplot
+
+```{r show-rainbow-specplot-protan, echo = TRUE, out.width = "60%"}
 rainbow(n = 20) %>% protan() %>% specplot()
 ```
 
 ---
-# Explore palettes with specplot: Rainbow + deutan
+# Explore rainbow palette with colorblindness specplot: Rainbow + protan + hclplot
 
-```{r show-specplot-rainbow-deutan, echo = TRUE, fig.height = 4}
-rainbow(n = 20) %>% deutan() %>% specplot()
+```{r show-rainbow-protan-hclplot, echo = TRUE, out.width = "60%"}
+rainbow(n = 20) %>% protan() %>% hclplot()
 ```
 
 ---
-# Explore palettes with specplot: Rainbow + tritan
+# Explore palettes with specplot: Rainbow + demoplot
 
-```{r show-specplot-rainbow-tritan, echo = TRUE, fig.height = 4}
-rainbow(n = 20) %>% tritan() %>% specplot()
+```{r show-rainbow-demoplot, echo = TRUE, out.width = "60%"}
+rainbow(n = 20) %>% demoplot()
 ```
+
+---
+# Explore palettes with specplot: Rainbow + protan + demoplot
+
+```{r show-rainbow-protan-demoplot, echo = TRUE, out.width = "60%"}
+rainbow(n = 20) %>% protan() %>% demoplot()
+```
+
+---
+# Compare Rainbow to Viridis: specplot
+
+.pull-left[
+```{r show-rainbow-viridis-specplot-1, echo = TRUE}
+rainbow(n = 20) %>% 
+  specplot()
+```
+]
+
+.pull-right[
+```{r show-rainbow-viridis-specplot-2, echo = TRUE}
+pals::viridis(n = 20) %>% 
+  specplot()
+```
+]
+
+---
+# Compare Rainbow to Viridis: specplot + protan
+
+.pull-left[
+```{r show-rainbow-viridis-specplot-protan-1, echo = TRUE}
+rainbow(n = 20) %>% 
+  protan() %>% 
+  specplot()
+```
+]
+
+.pull-right[
+```{r show-rainbow-viridis-specplot-protan-2, echo = TRUE}
+pals::viridis(n = 20) %>% 
+  protan() %>% 
+  specplot()
+```
+]
+
+---
+# Compare Rainbow to Viridis: hclplot
+
+.pull-left[
+```{r show-rainbow-viridis-hclplot-1, echo = TRUE}
+rainbow(n = 20) %>% 
+  hclplot()
+```
+]
+
+.pull-right[
+```{r show-rainbow-viridis-hclplot-2, echo = TRUE}
+pals::viridis(n = 20) %>% 
+  hclplot()
+```
+]
+
+---
+# Compare Rainbow to Viridis: hclplot + protan
+
+.pull-left[
+```{r show-rainbow-viridis-hclplot-protan-1, echo = TRUE}
+rainbow(n = 20) %>% 
+  protan() %>% 
+  hclplot()
+```
+]
+
+.pull-right[
+```{r show-rainbow-viridis-hclplot-protan-2, echo = TRUE}
+pals::viridis(n = 20) %>% 
+  protan() %>% 
+  hclplot()
+```
+]
+
+---
+# Compare Rainbow to Viridis: demoplot
+
+.pull-left[
+```{r show-rainbow-viridis-demoplot-1, echo = TRUE}
+rainbow(n = 20) %>% 
+  demoplot()
+```
+]
+
+.pull-right[
+```{r show-rainbow-viridis-demoplot-2, echo = TRUE}
+pals::viridis(n = 20) %>% 
+  demoplot()
+```
+]
+
+---
+# Compare Rainbow to Viridis: demoplot + protan
+
+.pull-left[
+```{r show-rainbow-viridis-demoplot-protan-show-1, echo = TRUE}
+rainbow(n = 20) %>% 
+  protan() %>% 
+  demoplot()
+```  
+]
+
+.pull-right[
+```{r show-rainbow-viridis-demoplot-protan-show-2, echo = TRUE}
+pals::viridis(n = 20) %>% 
+  protan() %>% 
+  demoplot()
+```
+]
